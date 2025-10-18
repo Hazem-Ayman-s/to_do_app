@@ -1,0 +1,291 @@
+* {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    outline: 0;
+}
+button{
+    appearance: none;         
+    -webkit-appearance: none;
+    border: 0;
+    cursor: pointer;
+}
+
+.over_line{
+    text-decoration: line-through;
+}
+body {
+    display: flex;
+    width: 100%;
+    font-family: Arial, sans-serif;
+    color: #0A0A0A;
+
+
+}
+
+.sidebar {
+    width: 15%;
+    height: 100vh;
+    border-right: 1px solid #cbcbcb;
+}
+
+aside {
+    height: 100vh;
+
+}
+
+aside div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    width: 100%;
+    height: 10vh;
+    border-bottom: 1px solid #D4D4D8;
+}
+
+.h_m {
+    width: 85%;
+    margin: 10px;
+
+}
+.progress_box{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border: 1px solid #E5E5E5;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.progress_box .top {
+    display: flex;
+    justify-content: space-between;
+}
+
+.progress_box .content{
+    width: 100%;
+    height: 10px;
+    background-color: #aeaeae;
+    border-radius: 4px;
+    overflow: hidden;
+
+}
+.progress_box .progress{
+    background-color: #0A0A0A;
+    height: 10px;
+    transition: width 0.4s ease-out;
+}
+.select_options{
+    background-color: #F5F5F5;
+    padding: 5px;
+    width: fit-content;
+    border-radius: 8px;
+    display: none;
+    transition: transform 0.3s ease;
+}
+.select_options:hover{
+    transform: scale(1.05);
+}
+.select_options button{
+    border-radius: 8px;
+    padding: 5px;
+    transition: background 0.1s ease-in;
+}
+.select_options button:hover{
+    background: #b3b3b3;
+}
+
+header {
+    height: 10vh;
+}
+
+nav .day {
+    display: flex;
+    gap: 10px;
+}
+
+nav ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(153deg, #5eb1efd6, #0090ffd6);
+    border-radius: 10px;
+    color: #fff;
+
+}
+
+nav .date {
+    color: #737373;
+    font-size: 12px;
+}
+
+.day .day_text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+}
+
+.new_task {
+    color: #fff;
+    background-color: #22C55E;
+    padding: 10px;
+    border-radius: 8px;
+    border: 0;
+    transition: transform ease 0.2s;
+}
+.new_task:hover{
+    transform: scale(1.05);
+}
+aside {
+    overflow: hidden;
+}
+aside ul {
+    padding: 10px;
+    height: 10vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+
+}
+
+aside ul li {
+    padding: 12px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    border-radius: 8px;
+    width: 80%;
+    gap: 10px;
+    cursor: pointer;
+}
+aside ul li:hover{
+    background-color: #F5F5F5;
+}
+aside ul li:active {
+    background-color: #F5F5F5;
+}
+
+main {
+    height: 90vh;
+    padding: 5px;
+}
+
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 10px 0;
+}
+
+.card {
+    width: 100%;
+    min-height: 60px;
+    border: 1px solid #cbcbcb;
+    border-radius: 8px;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+.card .card_content{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    
+
+}
+.card .card_content .tag{
+    color: #737373;
+    background-color: #fff;
+}
+.card_text{
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+.card_text div{
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+.card_text div button{
+    display: flex;
+    
+
+}
+.card .card_content .date{
+    background-color: #fff;
+    color:#DC2626;
+
+}
+input[type="checkbox"] {
+    appearance: none;         
+    width: 20px;
+    height: 20px;
+    border: 2px solid #E5E5E5;
+    border-radius: 6px;        
+  }
+input[type="checkbox"]:checked{
+    background-color: #171717;
+}
+input[type="checkbox"]:checked::after {
+    content: "✔";
+    color: #fff;
+    position: relative;
+    top: -12%;
+    left: 18%;
+    transform: translate(-50%, -50%);
+    font-size: 14px;
+  }
+
+.status {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    width: fit-content;
+    padding: 5px;
+    border-radius: 20px;
+}
+
+.s_high {
+    background-color: #fa7474;
+}
+
+.s_medium {
+    background-color: #fae474;
+}
+
+.s_low {
+    background-color: #a1fa74;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.d_high {
+    background-color: #d62020;
+}
+
+.d_medium {
+    background-color: #d6ca20;
+}
+
+.d_low {
+    background-color: #44d620;
+}
