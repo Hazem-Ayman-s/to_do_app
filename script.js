@@ -7,6 +7,7 @@ let work_tag = Array.from(cards).filter(el => el.querySelector("#work"));
 let personal_tag = Array.from(cards).filter(el => el.querySelector("#personal"));
 let icon = document.querySelector(".icon");
 let new_card = document.querySelector(".new_card");
+let aside_buttons = document.querySelectorAll(".aside_button")
 // //////////////////////refresh//////////////////////////
 
 function refresh() {
@@ -59,6 +60,12 @@ function select_box(value) {
 }
 
 // //////////////////////// aside buttons //////////////////////////
+function aside_button_clicked(btn) {
+  aside_buttons.forEach(el => {
+    el.style.background = "#fff";
+  })
+  btn.style.background = "#F5F5F5"
+}
 // /////////////////////////////////my day page/////////////////////
 function my_day() {
   document.getElementById("progress_text").innerText = "Today's Progress"
@@ -95,7 +102,7 @@ function planned() {
   document.querySelector(".icon").innerHTML = `  <i class="fa-regular fa-calendar" style="color:#fff;"></i>`;
   document.querySelector(".icon").style.background = "linear-gradient(160deg, #0d74ce, #0588f0)";
   document.getElementById("dateBox").innerText = `${cards.length} Scheduled`;
-  
+
   show_cards();
 }
 // /////////////////////////////////all tasks page/////////////////////
@@ -108,6 +115,12 @@ function all_tasks() {
   refresh();
   document.getElementById("dateBox").innerText = `${cards.length} Total - ${complited_cards.length} Complited`;
   show_cards()
+}
+function category_clicked(btn) {
+  document.querySelectorAll(".category").forEach(el => {
+    el.style.background = "#F5F5F5";
+  })
+  btn.style.background = "#fff"
 }
 // ///////////////////////cards/////////////////////
 
@@ -188,6 +201,18 @@ function add_card() {
   date = document.getElementById("date");
   priority = document.getElementById("priority");
   tag_select = document.getElementById("tag");
+  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  const now = new Date();
+  const date_format = new Date(date.value);
+  let color = "#737373";
+    
+  if (date.value <= now){
+    return;
+  }else{
+    color = "#DC2626";
+  }
+  console.log(color)
   if (title.value === "") {
     alert("ُEnter the title");
   } else {
@@ -201,7 +226,7 @@ function add_card() {
     <div>
     
     <button type="button" class="tag" id="${tag_select.value}">${tag_select.value}</button>
-    <button type="button" class="date"><i class="fa-solid fa-calendar"></i>${date.value}</button>
+    <button type="button" class="date" style="color:${color}"><i class="fa-solid fa-calendar"></i>${months[date_format.getMonth()] } ${date_format.getDate()}</button>
     </div>
     
     </div>
@@ -214,14 +239,14 @@ function add_card() {
     close_new();
   }
   refresh();
-  if (document.getElementById("title").innerHTML == "My day"){
+  if (document.getElementById("title").innerHTML == "My day") {
     my_day()
-  }else if(document.getElementById("title").innerHTML == "Important"){
+  } else if (document.getElementById("title").innerHTML == "Important") {
     important()
-  }else if(document.getElementById("title").innerHTML == "Planned"){
+  } else if (document.getElementById("title").innerHTML == "Planned") {
     planned()
-  }else{
+  } else {
     all_tasks()
   }
 
-  };
+};

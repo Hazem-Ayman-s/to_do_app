@@ -93,7 +93,7 @@ aside div {
     transition: background 0.1s ease-in;
 }
 .select_options button:hover{
-    background: #b3b3b3;
+    background: #fff;
 }
 
 header {
@@ -299,7 +299,7 @@ input[type="checkbox"]:checked::after {
     display: none;
     flex-direction: column;
     justify-content: center;
-    gap: 25px;
+    gap: 15px;
     border: 1px solid #aeaeae;
     border-radius: 8px;
 }
@@ -314,7 +314,7 @@ input[type="checkbox"]:checked::after {
     -webkit-appearance: none;
     border: 1px solid #737373;
     border-radius: 3px;
-    padding: 2px;
+    padding: 7px;
 }
 .new_card .submet{
     display: flex;
