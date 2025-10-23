@@ -1,16 +1,23 @@
 // //////////////////////variables///////////////////////////
+
 let cards = document.querySelectorAll(".card");
 let complited_cards = Array.from(cards).filter(el => el.classList.contains("complited"));
 let stars = Array.from(cards).filter(el => el.querySelector(".fa-solid.fa-star"));
 let work_tag = Array.from(cards).filter(el => el.querySelector("#work"));
 let personal_tag = Array.from(cards).filter(el => el.querySelector("#personal"));
+let icon = document.querySelector(".icon");
+let new_card = document.querySelector(".new_card");
 // //////////////////////refresh//////////////////////////
+
 function refresh() {
   cards = document.querySelectorAll(".card");
   complited_cards = Array.from(cards).filter(el => el.classList.contains("complited"));
   stars = Array.from(cards).filter(el => el.querySelector(".fa-solid.fa-star"));
-  personal_tag = Array.from(cards).filter(el => el.querySelector("#personal"));
   work_tag = Array.from(cards).filter(el => el.querySelector("#work"));
+  personal_tag = Array.from(cards).filter(el => el.querySelector("#personal"));
+  icon = document.querySelector(".icon");
+
+
   progress();
 }
 // //////////////////date////////////////////////
@@ -52,17 +59,18 @@ function select_box(value) {
 }
 
 // //////////////////////// aside buttons //////////////////////////
-let icon = document.querySelector(".icon");
+// /////////////////////////////////my day page/////////////////////
 function my_day() {
   document.getElementById("progress_text").innerText = "Today's Progress"
   select_box("none")
   progress_run("flex")
   document.getElementById("title").innerHTML = "My day";
   document.querySelector(".icon").innerHTML = `<i class="fa-regular fa-sun fa-lg"></i>`;
-  document.querySelector(".icon").style.background = "linear-gradient(153deg, #5eb1efd6, #0090ffd6)";
+  document.querySelector(".icon").style.background = "linear-gradient(160deg, #5eb1ef, #0090ff)";
   showDate();
-  show_cards()
+  show_cards();
 }
+// /////////////////////////////////important page/////////////////////
 
 function important() {
   select_box("none")
@@ -70,34 +78,40 @@ function important() {
   document.getElementById("progress_text").innerText = "Progress"
   document.getElementById("title").innerHTML = "Important";
   document.querySelector(".icon").innerHTML = `<i class="fa-solid fa-star" style="color:#fff;"></i>`;
-  document.querySelector(".icon").style.background = "#FE9A00";
+  document.querySelector(".icon").style.background = "linear-gradient(160deg, #ffb900, #fe9a00)";
   cards.forEach(el => {
     el.style.display = "none";
   });
   stars.forEach(el => {
     el.style.display = "flex";
   })
+  document.getElementById("dateBox").innerText = `${stars.length} Starred`;
 }
+// /////////////////////////////////planned page/////////////////////
 function planned() {
   select_box("none")
   progress_run("none")
   document.getElementById("title").innerHTML = "Planned";
-  document.querySelector(".icon").innerHTML = `<i class="fa-solid fa-star" style="color:#fff;"></i>`;
-  document.querySelector(".icon").style.background = "#FE9A00";
-  show_cards()
+  document.querySelector(".icon").innerHTML = `  <i class="fa-regular fa-calendar" style="color:#fff;"></i>`;
+  document.querySelector(".icon").style.background = "linear-gradient(160deg, #0d74ce, #0588f0)";
+  document.getElementById("dateBox").innerText = `${cards.length} Scheduled`;
+  
+  show_cards();
 }
+// /////////////////////////////////all tasks page/////////////////////
 function all_tasks() {
   select_box("block")
   progress_run("none")
   document.getElementById("title").innerHTML = "All tasks";
-  document.querySelector(".icon").innerHTML = `<i class="fa-solid fa-star" style="color:#fff;"></i>`;
-  document.querySelector(".icon").style.background = "#FE9A00";
+  document.querySelector(".icon").innerHTML = `<i class="fa-regular fa-square-check" style="color:#fff"></i>`;
+  document.querySelector(".icon").style.background = "linear-gradient(360deg, #113264, #0d74ce)";
   refresh();
   document.getElementById("dateBox").innerText = `${cards.length} Total - ${complited_cards.length} Complited`;
   show_cards()
 }
-// /////////////////////////////////cards/////////////////////
+// ///////////////////////cards/////////////////////
 
+// ////////////////////////complited cards/////////////////////
 function complited(line) {
   if (line.checked) {
     line.closest(".card").querySelector(".task_title").classList.add("over_line");
@@ -130,9 +144,10 @@ function starred(star) {
     })
   }
 }
+// ////////////////////New task///////////////////
 
 // ////////////////////onload///////////////////
-window.onload = showDate(), progress();
+window.onload = showDate(), refresh();
 
 function tag(value) {
   if (value == "personal") {
@@ -153,3 +168,60 @@ function tag(value) {
     show_cards()
   }
 }
+let title = document.getElementById("new_card_title");
+let desc = document.getElementById("desc");
+let date = document.getElementById("date");
+let priority = document.getElementById("priority");
+let tag_select = document.getElementById("tag");
+function open_new() {
+  new_card.style.display = "flex";
+}
+function close_new() {
+  new_card.style.display = "none";
+  title.value = desc.value = date.value = "";
+  priority.value = "Medium";
+}
+
+function add_card() {
+  title = document.getElementById("new_card_title");
+  desc = document.getElementById("desc");
+  date = document.getElementById("date");
+  priority = document.getElementById("priority");
+  tag_select = document.getElementById("tag");
+  if (title.value === "") {
+    alert("ُEnter the title");
+  } else {
+    const card = document.createElement("div")
+    card.classList.add("card")
+    card.innerHTML += `                
+    <div class="card_content">
+    <input type="checkbox" name="" id="" class="check_box" onclick="complited(this)">
+    <div class="card_text">
+    <p class="task_title">${title.value}</p>
+    <div>
+    
+    <button type="button" class="tag" id="${tag_select.value}">${tag_select.value}</button>
+    <button type="button" class="date"><i class="fa-solid fa-calendar"></i>${date.value}</button>
+    </div>
+    
+    </div>
+    </div>
+    <div><i class="fa-regular fa-star" style="color: #ffb900; cursor: pointer;"
+    onclick="starred(this)"></i>
+    </div>
+    `;
+    document.querySelector(".cards").appendChild(card)
+    close_new();
+  }
+  refresh();
+  if (document.getElementById("title").innerHTML == "My day"){
+    my_day()
+  }else if(document.getElementById("title").innerHTML == "Important"){
+    important()
+  }else if(document.getElementById("title").innerHTML == "Planned"){
+    planned()
+  }else{
+    all_tasks()
+  }
+
+  };

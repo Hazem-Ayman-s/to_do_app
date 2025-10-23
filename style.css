@@ -289,3 +289,46 @@ input[type="checkbox"]:checked::after {
 .d_low {
     background-color: #44d620;
 }
+.new_card{
+    background-color: #fff;
+    padding: 12px;
+    position: fixed;
+    top: 50%;
+    right: 50%;
+    transform: translate(50%,-50%);
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 25px;
+    border: 1px solid #aeaeae;
+    border-radius: 8px;
+}
+.new_card div{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    justify-content: center;
+}
+.new_card input,.new_card select,.new_card textarea{
+    appearance: none;
+    -webkit-appearance: none;
+    border: 1px solid #737373;
+    border-radius: 3px;
+    padding: 2px;
+}
+.new_card .submet{
+    display: flex;
+    flex-direction: row;
+}
+#addBtn{
+    width: 70%;
+    background-color: #22C55E;
+    color: #fff;
+    border-radius: 3px;
+    padding: 5px;
+}
+#cencel{
+    width: 30%;
+    padding: 8px;
+    border-radius: 5px;
+}

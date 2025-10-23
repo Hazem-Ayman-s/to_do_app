@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" cjontent="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
@@ -50,7 +50,7 @@
                         </div>
                     </li>
                     <li class="new_task_box">
-                        <button class="new_task">+ New Task</button>
+                        <button class="new_task" onclick="open_new()">+ New Task</button>
                     </li>
                 </ul>
             </nav>
@@ -118,6 +118,52 @@
             </div>
 
     </section>
+    <!------------------------------ new card -------------------------->
+    <div class="new_card">
+        <div>
+            <h2>Add New Task</h2>
+            <p>Create a new task with details like priority, tags, and due date</p>
+        </div>
+        <div>
+            <input id="new_card_title" placeholder="What do you want to do?" required>
+        </div>
+        <div>
+            <textarea id="desc" placeholder="Add more details..."></textarea>
+        </div>
+        <div>
+            <p>due date</p>
+            <input id="date" type="date">
+        </div>
+        <div>
+            <p>proiority</p>
+            <select id="priority">
+                <option>Low</option>
+                <option selected>Medium</option>
+                <option>High</option>
+            </select>
+        </div>
+        <div>
+            <p>Tags</p>
+            <select id="tag">
+                <option>work</option>
+                <option selected>personal</option>
+            </select>
+            <p>Press Enter to add tag. Max 6 tags.</p>
+        </div>
+        <div>
+            <p>status</p>
+            <select id="status">
+                <option>To do</option>
+                <option selected>In progress</option>
+                <option>Complited</option>
+            </select>
+        </div>
+        <div class="submet">
+            <button id="addBtn"  onclick="add_card()">Add Task</button>
+            <button id="cencel" onclick="close_new()">Cenecel</button>
+        </div>
+    </div>
+
 
     <script src="script.js"></script>
 </body>
