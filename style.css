@@ -251,44 +251,6 @@ input[type="checkbox"]:checked::after {
     font-size: 14px;
   }
 
-.status {
-    display: flex;
-    gap: 5px;
-    align-items: center;
-    width: fit-content;
-    padding: 5px;
-    border-radius: 20px;
-}
-
-.s_high {
-    background-color: #fa7474;
-}
-
-.s_medium {
-    background-color: #fae474;
-}
-
-.s_low {
-    background-color: #a1fa74;
-}
-
-.dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-}
-
-.d_high {
-    background-color: #d62020;
-}
-
-.d_medium {
-    background-color: #d6ca20;
-}
-
-.d_low {
-    background-color: #44d620;
-}
 .new_card{
     background-color: #fff;
     padding: 12px;
@@ -331,4 +293,21 @@ input[type="checkbox"]:checked::after {
     width: 30%;
     padding: 8px;
     border-radius: 5px;
+}
+.planned_page .title{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.overdue_section .title p{
+    color: #dc2626;
+}
+.today_section .title p{
+    color: #0090FF;
+}
+.planned_page .num{
+    background-color: #dedcdc;
+    width: 17px;
+    height: 17px;
+    border-radius: 20%;
 }

@@ -27,10 +27,12 @@
                     <i class="fa-regular fa-star"></i>
                     <p>Important</p>
                 </li>
-                <li onclick="planned(),aside_button_clicked(this)" class="aside_button"><i class="fa-regular fa-calendar"></i>
+                <li onclick="planned(),aside_button_clicked(this)" class="aside_button"><i
+                        class="fa-regular fa-calendar"></i>
                     <p>Planned</p>
                 </li>
-                <li onclick="all_tasks(),aside_button_clicked(this)" class="aside_button"><i class="fa-regular fa-square-check"></i>
+                <li onclick="all_tasks(),aside_button_clicked(this)" class="aside_button"><i
+                        class="fa-regular fa-square-check"></i>
                     <p>All Tasks</p>
                 </li>
             </ul>
@@ -71,9 +73,12 @@
             <!------------------------------ select -------------------------->
             <div class="select_box">
                 <div class="select_options">
-                    <button type="button" onclick="tag(id),category_clicked(this)"class="category"id="all">All</button>
-                    <button type="button" onclick="tag(id),category_clicked(this)"class="category"id="work">Work</button>
-                    <button type="button" onclick="tag(id),category_clicked(this)"class="category"id="personal">Perosal</button>
+                    <button type="button" onclick="tag(id),category_clicked(this)" class="category"
+                        id="all">All</button>
+                    <button type="button" onclick="tag(id),category_clicked(this)" class="category"
+                        id="work">Work</button>
+                    <button type="button" onclick="tag(id),category_clicked(this)" class="category"
+                        id="personal">Perosal</button>
                 </div>
             </div>
             <!------------------------------ cards -------------------------->
@@ -116,12 +121,36 @@
 
 
             </div>
+            <!------------------------------ planned section -------------------------->
+            <div class="planned_page">
+                <div class="overdue_section">
+                    <div class="title">
+                        <p>Overdue</p>
+                        <div class="num"></div>
+                    </div>
+                    
+                </div>
+                <div class="today_section">
+                    <div class="title">
+                        <p>Today</p>
+                        <div class="num"></div>
+                    </div>
+
+                </div>
+                <div class="Tomorrow_section">
+                    <div class="title">
+                        <p>Tomorrow</p>
+                        <div class="num"></div>
+                    </div>
+
+                </div>
+            </div>
 
     </section>
     <!------------------------------ new card -------------------------->
     <div class="new_card">
         <div>
-            <div >
+            <div>
                 <h2>Add New Task</h2>
             </div>
             <div style="flex-direction: row; align-items: center; justify-content: start;">
@@ -165,7 +194,7 @@
             </select>
         </div>
         <div class="submet">
-            <button id="addBtn"  onclick="add_card()">Add Task</button>
+            <button id="addBtn" onclick="add_card()">Add Task</button>
             <button id="cencel" onclick="close_new()">Cencel</button>
         </div>
     </div>

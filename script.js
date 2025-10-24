@@ -195,49 +195,47 @@ function close_new() {
   priority.value = "Medium";
 }
 
+
 function add_card() {
   title = document.getElementById("new_card_title");
   desc = document.getElementById("desc");
   date = document.getElementById("date");
+  date_format = new Date(date.value);
   priority = document.getElementById("priority");
   tag_select = document.getElementById("tag");
   const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
     "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-  const now = new Date();
-  const date_format = new Date(date.value);
-  let color = "#737373";
-    
-  if (date.value <= now){
-    return;
-  }else{
-    color = "#DC2626";
-  }
-  console.log(color)
+    let color = "#737373";
+    if (new Date(date.value) >= new Date()) {
+    } else {
+      color = "#DC2626";
+    }
   if (title.value === "") {
     alert("ُEnter the title");
-  } else {
+    }
+  else{
     const card = document.createElement("div")
     card.classList.add("card")
     card.innerHTML += `                
-    <div class="card_content">
-    <input type="checkbox" name="" id="" class="check_box" onclick="complited(this)">
-    <div class="card_text">
-    <p class="task_title">${title.value}</p>
-    <div>
-    
-    <button type="button" class="tag" id="${tag_select.value}">${tag_select.value}</button>
-    <button type="button" class="date" style="color:${color}"><i class="fa-solid fa-calendar"></i>${months[date_format.getMonth()] } ${date_format.getDate()}</button>
-    </div>
-    
-    </div>
-    </div>
-    <div><i class="fa-regular fa-star" style="color: #ffb900; cursor: pointer;"
-    onclick="starred(this)"></i>
-    </div>
-    `;
+      <div class="card_content">
+      <input type="checkbox" name="" id="" class="check_box" onclick="complited(this)">
+      <div class="card_text">
+      <p class="task_title">${title.value}</p>
+      <div>
+      
+      <button type="button" class="tag" id="${tag_select.value}">${tag_select.value}</button>
+      <button type="button" class="date" style="color:${color}"><i class="fa-solid fa-calendar"></i>${months[date_format.getMonth()]} ${date_format.getDate()}</button>
+      </div>
+      
+      </div>
+      </div>
+      <div><i class="fa-regular fa-star" style="color: #ffb900; cursor: pointer;"
+      onclick="starred(this)"></i>
+      </div>
+      `;
     document.querySelector(".cards").appendChild(card)
-    close_new();
   }
+  close_new();
   refresh();
   if (document.getElementById("title").innerHTML == "My day") {
     my_day()
@@ -245,7 +243,7 @@ function add_card() {
     important()
   } else if (document.getElementById("title").innerHTML == "Planned") {
     planned()
-  } else {
+  } else if (document.getElementById("title").innerHTML == "All tasks"){
     all_tasks()
   }
 
