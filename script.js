@@ -280,4 +280,4 @@ function planned_categories() {
   })
 
 }
-window.onload = showDate(), refresh(),my_day();
+window.onload = function(){showDate(); refresh();my_day();}

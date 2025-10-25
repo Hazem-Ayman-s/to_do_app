@@ -293,6 +293,8 @@ input[type="checkbox"]:checked::after {
     width: 30%;
     padding: 8px;
     border-radius: 5px;
+}.planned_page{
+    display: none;
 }
 .planned_page .title{
     display: flex;
