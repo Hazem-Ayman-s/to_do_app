@@ -68,6 +68,7 @@ function aside_button_clicked(btn) {
 }
 // /////////////////////////////////my day page/////////////////////
 function my_day() {
+  document.querySelector(".cards").style.display = "flex"
   document.getElementById("progress_text").innerText = "Today's Progress"
   select_box("none")
   progress_run("flex")
@@ -81,6 +82,7 @@ function my_day() {
 // /////////////////////////////////important page/////////////////////
 
 function important() {
+  document.querySelector(".cards").style.display = "flex"
   select_box("none")
   progress_run("flex")
   document.getElementById("progress_text").innerText = "Progress"
@@ -104,13 +106,13 @@ function planned() {
   document.querySelector(".icon").innerHTML = `  <i class="fa-regular fa-calendar" style="color:#fff;"></i>`;
   document.querySelector(".icon").style.background = "linear-gradient(160deg, #0d74ce, #0588f0)";
   document.getElementById("dateBox").innerText = `${cards.length} Scheduled`;
+  document.querySelector(".cards").style.display = "none"
   document.querySelector(".planned_page").style.display = "block"
-  overdue()
-
-  show_cards();
+  planned_categories()
 }
 // /////////////////////////////////all tasks page/////////////////////
 function all_tasks() {
+  document.querySelector(".cards").style.display = "flex"
   select_box("block")
   progress_run("none")
   document.getElementById("title").innerHTML = "All tasks";
@@ -165,7 +167,7 @@ function starred(star) {
 // ////////////////////New task///////////////////
 
 // ////////////////////onload///////////////////
-window.onload = showDate(), refresh();
+window.onload = showDate(), refresh(),my_day();
 
 function tag(value) {
   if (value == "personal") {
@@ -238,6 +240,8 @@ function add_card() {
       onclick="starred(this)"></i>
       </div>
       `;
+    card.style.display = "flex"
+
     card.setAttribute("date_value" , date.value);
     document.querySelector(".cards").appendChild(card)
   }
@@ -254,10 +258,25 @@ function add_card() {
   }
 
 };
-function overdue() {
-  cards.forEach(card => {
-    if (card.getAttribute("date_value") == new Date("2025-10-17")){
-      document.querySelector(".overdue_section").appendChild(card)
+function planned_categories() {
+  const planned_cards = cards
+  planned_cards.forEach(card => {
+    const copy = card.cloneNode(true)
+    if (!copy.getAttribute("date_value")){
+      return;
+    }
+    else if (new Date(copy.getAttribute("date_value")).getDate() < new Date().getDate()){
+      document.querySelector(".overdue_cards").append(copy)
+      card.style.display = "flex"
+      
+    }else if (new Date(copy.getAttribute("date_value")).getDate() == new Date().getDate()){
+      document.querySelector(".today_cards").append(copy)
+      card.style.display = "flex"
+
+    }else if (new Date(copy.getAttribute("date_value")).getDate() == new Date().getDate()+1){
+      document.querySelector(".tomorrow_cards").append(copy)
+      card.style.display = "flex"
+
     }
   })
 
