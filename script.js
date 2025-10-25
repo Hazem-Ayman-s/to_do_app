@@ -76,6 +76,7 @@ function my_day() {
   document.querySelector(".icon").style.background = "linear-gradient(160deg, #5eb1ef, #0090ff)";
   showDate();
   show_cards();
+  document.querySelector(".planned_page").style.display = "none"
 }
 // /////////////////////////////////important page/////////////////////
 
@@ -93,6 +94,7 @@ function important() {
     el.style.display = "flex";
   })
   document.getElementById("dateBox").innerText = `${stars.length} Starred`;
+  document.querySelector(".planned_page").style.display = "none"
 }
 // /////////////////////////////////planned page/////////////////////
 function planned() {
@@ -102,6 +104,8 @@ function planned() {
   document.querySelector(".icon").innerHTML = `  <i class="fa-regular fa-calendar" style="color:#fff;"></i>`;
   document.querySelector(".icon").style.background = "linear-gradient(160deg, #0d74ce, #0588f0)";
   document.getElementById("dateBox").innerText = `${cards.length} Scheduled`;
+  document.querySelector(".planned_page").style.display = "block"
+  overdue()
 
   show_cards();
 }
@@ -115,12 +119,14 @@ function all_tasks() {
   refresh();
   document.getElementById("dateBox").innerText = `${cards.length} Total - ${complited_cards.length} Complited`;
   show_cards()
+  document.querySelector(".planned_page").style.display = "none"
 }
 function category_clicked(btn) {
   document.querySelectorAll(".category").forEach(el => {
     el.style.background = "#F5F5F5";
   })
   btn.style.background = "#fff"
+  document.querySelector(".planned_page").style.display = "none"
 }
 // ///////////////////////cards/////////////////////
 
@@ -135,7 +141,6 @@ function complited(line) {
     line.closest(".card").querySelector(".task_title").style.color = "#0A0A0A";
     line.closest(".card").classList.remove("complited");
   }
-  refresh();
   document.getElementById("dateBox").innerText = `${cards.length} Total - ${complited_cards.length} Complited`;
 }
 // ///////////////////stars//////////////////////////////
@@ -205,15 +210,15 @@ function add_card() {
   tag_select = document.getElementById("tag");
   const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
     "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-    let color = "#737373";
-    if (new Date(date.value) >= new Date()) {
-    } else {
-      color = "#DC2626";
-    }
+  let color = "#737373";
+  if (new Date(date.value) >= new Date()) {
+  } else {
+    color = "#DC2626";
+  }
   if (title.value === "") {
     alert("ُEnter the title");
-    }
-  else{
+  }
+  else {
     const card = document.createElement("div")
     card.classList.add("card")
     card.innerHTML += `                
@@ -233,6 +238,7 @@ function add_card() {
       onclick="starred(this)"></i>
       </div>
       `;
+    card.setAttribute("date_value" , date.value);
     document.querySelector(".cards").appendChild(card)
   }
   close_new();
@@ -243,8 +249,16 @@ function add_card() {
     important()
   } else if (document.getElementById("title").innerHTML == "Planned") {
     planned()
-  } else if (document.getElementById("title").innerHTML == "All tasks"){
+  } else if (document.getElementById("title").innerHTML == "All tasks") {
     all_tasks()
   }
 
 };
+function overdue() {
+  cards.forEach(card => {
+    if (card.getAttribute("date_value") == new Date("2025-10-17")){
+      document.querySelector(".overdue_section").appendChild(card)
+    }
+  })
+
+}
