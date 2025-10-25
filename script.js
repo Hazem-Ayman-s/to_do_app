@@ -167,7 +167,6 @@ function starred(star) {
 // ////////////////////New task///////////////////
 
 // ////////////////////onload///////////////////
-window.onload = showDate(), refresh(),my_day();
 
 function tag(value) {
   if (value == "personal") {
@@ -281,3 +280,4 @@ function planned_categories() {
   })
 
 }
+window.onload = showDate(), refresh(),my_day();
