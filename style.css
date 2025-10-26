@@ -293,8 +293,6 @@ input[type="checkbox"]:checked::after {
     width: 30%;
     padding: 8px;
     border-radius: 5px;
-}.planned_page{
-    display: none;
 }
 .planned_page .title{
     display: flex;
@@ -312,11 +310,4 @@ input[type="checkbox"]:checked::after {
     width: 17px;
     height: 17px;
     border-radius: 20%;
-}
-.today_cards , .tomorrow_cards , .overdue_cards{
-    margin: 10px 0;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    overflow: hidden;
 }

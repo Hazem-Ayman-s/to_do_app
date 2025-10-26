@@ -8,7 +8,6 @@ let personal_tag = Array.from(cards).filter(el => el.querySelector("#personal"))
 let icon = document.querySelector(".icon");
 let new_card = document.querySelector(".new_card");
 let aside_buttons = document.querySelectorAll(".aside_button")
-
 // //////////////////////refresh//////////////////////////
 
 function refresh() {
@@ -18,7 +17,8 @@ function refresh() {
   work_tag = Array.from(cards).filter(el => el.querySelector("#work"));
   personal_tag = Array.from(cards).filter(el => el.querySelector("#personal"));
   icon = document.querySelector(".icon");
-  document.querySelector(".overdue_cards").innerHTML = document.querySelector(".today_cards").innerHTML = document.querySelector(".tomorrow_cards").innerHTML = ""
+
+
   progress();
 }
 // //////////////////date////////////////////////
@@ -68,8 +68,6 @@ function aside_button_clicked(btn) {
 }
 // /////////////////////////////////my day page/////////////////////
 function my_day() {
-  refresh()
-  document.querySelector(".cards").style.display = "flex"
   document.getElementById("progress_text").innerText = "Today's Progress"
   select_box("none")
   progress_run("flex")
@@ -78,13 +76,10 @@ function my_day() {
   document.querySelector(".icon").style.background = "linear-gradient(160deg, #5eb1ef, #0090ff)";
   showDate();
   show_cards();
-  document.querySelector(".planned_page").style.display = "none"
 }
 // /////////////////////////////////important page/////////////////////
 
 function important() {
-  refresh()
-  document.querySelector(".cards").style.display = "flex"
   select_box("none")
   progress_run("flex")
   document.getElementById("progress_text").innerText = "Progress"
@@ -98,40 +93,34 @@ function important() {
     el.style.display = "flex";
   })
   document.getElementById("dateBox").innerText = `${stars.length} Starred`;
-  document.querySelector(".planned_page").style.display = "none"
 }
 // /////////////////////////////////planned page/////////////////////
 function planned() {
-  refresh()
   select_box("none")
   progress_run("none")
   document.getElementById("title").innerHTML = "Planned";
   document.querySelector(".icon").innerHTML = `  <i class="fa-regular fa-calendar" style="color:#fff;"></i>`;
   document.querySelector(".icon").style.background = "linear-gradient(160deg, #0d74ce, #0588f0)";
   document.getElementById("dateBox").innerText = `${cards.length} Scheduled`;
-  document.querySelector(".cards").style.display = "none"
-  document.querySelector(".planned_page").style.display = "block"
-  planned_categories()
+
+  show_cards();
 }
 // /////////////////////////////////all tasks page/////////////////////
 function all_tasks() {
-  refresh();
-  document.querySelector(".cards").style.display = "flex"
   select_box("block")
   progress_run("none")
   document.getElementById("title").innerHTML = "All tasks";
   document.querySelector(".icon").innerHTML = `<i class="fa-regular fa-square-check" style="color:#fff"></i>`;
   document.querySelector(".icon").style.background = "linear-gradient(360deg, #113264, #0d74ce)";
+  refresh();
   document.getElementById("dateBox").innerText = `${cards.length} Total - ${complited_cards.length} Complited`;
   show_cards()
-  document.querySelector(".planned_page").style.display = "none"
 }
 function category_clicked(btn) {
   document.querySelectorAll(".category").forEach(el => {
     el.style.background = "#F5F5F5";
   })
   btn.style.background = "#fff"
-  document.querySelector(".planned_page").style.display = "none"
 }
 // ///////////////////////cards/////////////////////
 
@@ -146,13 +135,11 @@ function complited(line) {
     line.closest(".card").querySelector(".task_title").style.color = "#0A0A0A";
     line.closest(".card").classList.remove("complited");
   }
-  
+  refresh();
   document.getElementById("dateBox").innerText = `${cards.length} Total - ${complited_cards.length} Complited`;
-  progress()
 }
 // ///////////////////stars//////////////////////////////
 function starred(star) {
-  refresh();
   if (star.classList.contains("fa-solid")) {
     star.classList.remove("fa-solid");
     star.classList.add("fa-regular");
@@ -160,6 +147,7 @@ function starred(star) {
     star.classList.remove("fa-regular");
     star.classList.add("fa-solid");
   }
+  refresh();
   if (document.getElementById("title").innerHTML == "Important") {
     cards.forEach(el => {
       el.style.display = "none";
@@ -172,6 +160,7 @@ function starred(star) {
 // ////////////////////New task///////////////////
 
 // ////////////////////onload///////////////////
+window.onload = showDate(), refresh();
 
 function tag(value) {
   if (value == "personal") {
@@ -216,15 +205,15 @@ function add_card() {
   tag_select = document.getElementById("tag");
   const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
     "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-  let color = "#737373";
-  if (new Date(date.value) >= new Date()) {
-  } else {
-    color = "#DC2626";
-  }
+    let color = "#737373";
+    if (new Date(date.value) >= new Date()) {
+    } else {
+      color = "#DC2626";
+    }
   if (title.value === "") {
     alert("ُEnter the title");
-  }
-  else {
+    }
+  else{
     const card = document.createElement("div")
     card.classList.add("card")
     card.innerHTML += `                
@@ -244,9 +233,6 @@ function add_card() {
       onclick="starred(this)"></i>
       </div>
       `;
-    card.style.display = "flex"
-
-    card.setAttribute("date_value", date.value);
     document.querySelector(".cards").appendChild(card)
   }
   close_new();
@@ -257,27 +243,8 @@ function add_card() {
     important()
   } else if (document.getElementById("title").innerHTML == "Planned") {
     planned()
-  } else if (document.getElementById("title").innerHTML == "All tasks") {
+  } else if (document.getElementById("title").innerHTML == "All tasks"){
     all_tasks()
   }
 
 };
-function planned_categories() {
-  refresh()
-  let overdue_cards = Array.from(cards).filter(el => new Date(el.getAttribute("date_value")).getDate() < new Date().getDate())
-  let today_cards = Array.from(cards).filter(el => new Date(el.getAttribute("date_value")).getDate() == new Date().getDate())
-  let tomorrow_cards = Array.from(cards).filter(el => new Date(el.getAttribute("date_value")).getDate() == new Date().getDate() + 1)
-  console.log(overdue_cards)
-  overdue_cards.forEach(el => {
-    document.querySelector(".overdue_cards").append(el.cloneNode(true))
-  })
-  today_cards.forEach(el => {
-    document.querySelector(".today_cards").append(el.cloneNode(true))
-  })
-  tomorrow_cards.forEach(el => {
-    document.querySelector(".tomorrow_cards").append(el.cloneNode(true))
-  })
-
-
-}
-window.onload = function () { showDate(); refresh(); my_day();}
