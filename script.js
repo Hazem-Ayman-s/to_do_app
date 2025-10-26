@@ -8,6 +8,7 @@ let personal_tag = Array.from(cards).filter(el => el.querySelector("#personal"))
 let icon = document.querySelector(".icon");
 let new_card = document.querySelector(".new_card");
 let aside_buttons = document.querySelectorAll(".aside_button")
+
 // //////////////////////refresh//////////////////////////
 
 function refresh() {
@@ -17,8 +18,7 @@ function refresh() {
   work_tag = Array.from(cards).filter(el => el.querySelector("#work"));
   personal_tag = Array.from(cards).filter(el => el.querySelector("#personal"));
   icon = document.querySelector(".icon");
-
-
+  document.querySelector(".overdue_cards").innerHTML = document.querySelector(".today_cards").innerHTML = document.querySelector(".tomorrow_cards").innerHTML = ""
   progress();
 }
 // //////////////////date////////////////////////
@@ -68,6 +68,7 @@ function aside_button_clicked(btn) {
 }
 // /////////////////////////////////my day page/////////////////////
 function my_day() {
+  refresh()
   document.querySelector(".cards").style.display = "flex"
   document.getElementById("progress_text").innerText = "Today's Progress"
   select_box("none")
@@ -82,6 +83,7 @@ function my_day() {
 // /////////////////////////////////important page/////////////////////
 
 function important() {
+  refresh()
   document.querySelector(".cards").style.display = "flex"
   select_box("none")
   progress_run("flex")
@@ -100,6 +102,7 @@ function important() {
 }
 // /////////////////////////////////planned page/////////////////////
 function planned() {
+  refresh()
   select_box("none")
   progress_run("none")
   document.getElementById("title").innerHTML = "Planned";
@@ -112,13 +115,13 @@ function planned() {
 }
 // /////////////////////////////////all tasks page/////////////////////
 function all_tasks() {
+  refresh();
   document.querySelector(".cards").style.display = "flex"
   select_box("block")
   progress_run("none")
   document.getElementById("title").innerHTML = "All tasks";
   document.querySelector(".icon").innerHTML = `<i class="fa-regular fa-square-check" style="color:#fff"></i>`;
   document.querySelector(".icon").style.background = "linear-gradient(360deg, #113264, #0d74ce)";
-  refresh();
   document.getElementById("dateBox").innerText = `${cards.length} Total - ${complited_cards.length} Complited`;
   show_cards()
   document.querySelector(".planned_page").style.display = "none"
@@ -144,9 +147,11 @@ function complited(line) {
     line.closest(".card").classList.remove("complited");
   }
   document.getElementById("dateBox").innerText = `${cards.length} Total - ${complited_cards.length} Complited`;
+  progress()
 }
 // ///////////////////stars//////////////////////////////
 function starred(star) {
+  refresh();
   if (star.classList.contains("fa-solid")) {
     star.classList.remove("fa-solid");
     star.classList.add("fa-regular");
@@ -154,7 +159,6 @@ function starred(star) {
     star.classList.remove("fa-regular");
     star.classList.add("fa-solid");
   }
-  refresh();
   if (document.getElementById("title").innerHTML == "Important") {
     cards.forEach(el => {
       el.style.display = "none";
@@ -241,7 +245,7 @@ function add_card() {
       `;
     card.style.display = "flex"
 
-    card.setAttribute("date_value" , date.value);
+    card.setAttribute("date_value", date.value);
     document.querySelector(".cards").appendChild(card)
   }
   close_new();
@@ -258,26 +262,21 @@ function add_card() {
 
 };
 function planned_categories() {
-  const planned_cards = cards
-  planned_cards.forEach(card => {
-    const copy = card.cloneNode(true)
-    if (!copy.getAttribute("date_value")){
-      return;
-    }
-    else if (new Date(copy.getAttribute("date_value")).getDate() < new Date().getDate()){
-      document.querySelector(".overdue_cards").append(copy)
-      card.style.display = "flex"
-      
-    }else if (new Date(copy.getAttribute("date_value")).getDate() == new Date().getDate()){
-      document.querySelector(".today_cards").append(copy)
-      card.style.display = "flex"
-
-    }else if (new Date(copy.getAttribute("date_value")).getDate() == new Date().getDate()+1){
-      document.querySelector(".tomorrow_cards").append(copy)
-      card.style.display = "flex"
-
-    }
+  refresh()
+  let overdue_cards = Array.from(cards).filter(el => new Date(el.getAttribute("date_value")).getDate() < new Date().getDate())
+  let today_cards = Array.from(cards).filter(el => new Date(el.getAttribute("date_value")).getDate() == new Date().getDate())
+  let tomorrow_cards = Array.from(cards).filter(el => new Date(el.getAttribute("date_value")).getDate() == new Date().getDate() + 1)
+  console.log(overdue_cards)
+  overdue_cards.forEach(el => {
+    document.querySelector(".overdue_cards").append(el.cloneNode(true))
+  })
+  today_cards.forEach(el => {
+    document.querySelector(".today_cards").append(el.cloneNode(true))
+  })
+  tomorrow_cards.forEach(el => {
+    document.querySelector(".tomorrow_cards").append(el.cloneNode(true))
   })
 
+
 }
-window.onload = function(){showDate(); refresh();my_day();}
+window.onload = function () { showDate(); refresh(); }
