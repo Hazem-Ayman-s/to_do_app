@@ -146,6 +146,7 @@ function complited(line) {
     line.closest(".card").querySelector(".task_title").style.color = "#0A0A0A";
     line.closest(".card").classList.remove("complited");
   }
+  
   document.getElementById("dateBox").innerText = `${cards.length} Total - ${complited_cards.length} Complited`;
   progress()
 }
@@ -279,4 +280,4 @@ function planned_categories() {
 
 
 }
-window.onload = function () { showDate(); refresh(); }
+window.onload = function () { showDate(); refresh(); my_day();}
